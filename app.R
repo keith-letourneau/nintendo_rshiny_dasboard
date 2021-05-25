@@ -14,6 +14,9 @@ df <- read.csv("nintendo_case_study.csv")
 
 multi_factor <- df[,c("video_game_play","income", "comp", "res_impor","age")]
 multi_factor_scaled <- scale(multi_factor)
+
+# Elbow Method to determine number of clusters
+fviz_nbclust(multi_factor_scaled,kmeans,method="wss")
 multi_factor_6<-kmeans(multi_factor_scaled,centers=6,nstart=25)
 
 df <- data.frame(df, multi_factor_cat = factor(multi_factor_6$cluster))
